@@ -59,7 +59,28 @@
 
 <script>
 
-</script>
+  
+//funkcja odpowiedzialna za dodanie klasy playing 
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+    if (!audio) return; // to oznacza jeśli nie ma audio!!!
+    audio.currentTime = 0; // skracanie trwania dzwieku, aby moc klikać
+    audio.play();
+    key.classList.add('playing');
+  }
+//funkcja odpowiedzialna za usuwanie efektu
+  function removeTransition(e) {
+    if (e.propertyName !== 'transform') return; 
+    this.classList.remove('playing'); // usuwa klasę .playing
+  }
+
+  const keys = document.querySelectorAll('.key');
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
+  window.addEventListener('keydown', playSound);
+
+  </script>
 
 
 </body>
