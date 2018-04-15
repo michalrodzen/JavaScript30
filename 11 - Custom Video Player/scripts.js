@@ -54,7 +54,7 @@ document.onkeypress = function(e){
     if((e || window.event).keyCode === 32){
         video.paused ? video.play() : video.pause();
     }
-}; ///fajny sposób na pause po spacji / innym przycisku :) 
+}; //fajny sposób na pause po spacji / innym przycisku :) 
 
 
 
