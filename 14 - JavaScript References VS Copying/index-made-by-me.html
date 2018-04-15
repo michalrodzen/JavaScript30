@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Reference VS Copy</title>
+</head>
+<body>
+
+  <script>
+    // start with strings, numbers and booleans
+
+    let age = 100;
+    let age2 = age;
+    console.log(age, age2);
+    age = 200;
+    console.log(age, age2);
+
+    let name = 'wes';
+    let name2 = name;
+    console.log (name, name2);
+    name = 'wesley';
+    console.log (name, name2);
+//chodzi tu o ot, że jak nadpiszemy tylko jedną zmienną, to druga zostaje taka sama :) 
+
+
+    // Let's say we have an array
+    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+
+    // and we want to make a copy of it.
+
+    const team = players;
+    console.log(players, team);
+
+    // You might think we can just do something like this:
+
+    //team[3] = 'Lux';
+    //console.log(players, team); // zmieni na LUX tez w players, ponieważ team nei ejst array, tylko jest zmienną, do któej jest przypisana array players  (reference)- wiec updatuje też players
+    
+
+    // however what happens when we update that array?
+    // now here is the problem!
+    // oh no - we have edited the original array too!
+    // Why? It's because that is an array reference, not an array copy. They both point to the same array!
+    
+    // So, how do we fix this? We take a copy instead!
+
+    const team2 = players.slice();// - tak kopiujemy tablice, a nie robimy reference
+    
+
+
+    // one way
+
+    // or create a new array and concat the old one in
+
+    const team3 = [].concat(players);
+
+    // or use the new ES6 Spread
+
+    const team4 = [...players]; //copy - spread z ES6 pozawala nam an wrzucenie do nowej tablicy innej tablicy (wygodne)
+
+    const team5 = Array.from(players); // yak też można zrobić copy
+
+    // now when we update it, the original one isn't changed
+
+    // The same thing goes for objects, let's say we have a person object
+
+    // with Objects
+    const person = {
+      name: 'Wes Bos',
+      age: 80
+    };
+
+    // and think we make a copy:
+    const captain = person;
+    captain.name = 99; // tak nie robimy kopii - zmieniając captain, będziemy zmieniac też persona - reference
+
+    // how do we take a copy instead?
+
+    const cap2 = Object.assign({}, person, { number: 99});
+    console.log (person, cap2);
+    // We will hopefully soon see the object ...spread
+
+    cap3 = {...person};
+
+    // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+
+    const wes = {
+      name: 'Wes',
+      age: 100,
+      social: {
+        twitter: '@wesbos',
+        facebook: 'wesbos.developer'
+      }
+    };
+
+    console.clear();
+    console.log(wes); // {....   } działa tlyko na pierwszym poziomie. Jakbvdziemy zmieniac twitter, to juz ebdzie dzialac jak reference
+
+    const dev = Object.assign({}, wes);
+
+    const dev2 = JSON.parse(JSON.stringify(wes));
+
+
+  </script>
+
+</body>
+</html>
