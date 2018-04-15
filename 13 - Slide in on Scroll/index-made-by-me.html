@@ -43,6 +43,7 @@
   </div>
 
   <script>
+//funkcja, którą możemy dodać do innej funkcji i ona sprawi, że będzie się coś działo rzadziej "co 200ms" 
     function debounce(func, wait = 20, immediate = true) {
       var timeout;
       return function() {
@@ -57,6 +58,32 @@
         if (callNow) func.apply(context, args);
       };
     }
+
+
+
+    
+    const sliderImages = document.querySelectorAll('.slide-in');
+
+    function checkSlide(e) {
+      sliderImages.forEach(sliderImage => {
+// mamy połowę obrazka
+        const slideInAt = ((window.scrollY + window.innerHeight) - sliderImage.height / 2);
+//dół obrazka
+        const imageBottom = sliderImage.offsetTop + sliderImage.height;
+        const isHalfShawn = slideInAt > sliderImage.offsetTop;
+        const isNotScrolledPast = window.scrollY < imageBottom; //sprawdza, czy nie przejechaliśmy zadaleko - jak przejedziemy to obrazek ma wracac
+        
+        if (isHalfShawn && isNotScrolledPast) {
+          sliderImage.classList.add('active');
+        } else {
+          sliderImage.classList.remove('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', debounce(checkSlide));
+
+
 
   </script>
 
