@@ -31,9 +31,9 @@
     highlight.classList.add('highlight');
     document.body.append(highlight);
 
+
     function highlightLink() {
       const linkCoords = this.getBoundingClientRect(); // funkcja pokazująca, fgdzie an stronie(coordy)jest położony dany element (słowo, link etc...)
-
       console.log(linkCoords);
 
       const coords = {  //tworzymy coords aby móc kolorowaćhighlighty naweyt jak scrollujemy w dół stronę. podmieniamy na coord wszytstkie coordLeft (49line);
@@ -43,11 +43,9 @@
         left: linkCoords.left + window.scrollX
       }
 
-
       highlight.style.width = `${coords.width}px`;
       highlight.style.height = `${coords.height}px`;
       highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
-
 
     }
 
