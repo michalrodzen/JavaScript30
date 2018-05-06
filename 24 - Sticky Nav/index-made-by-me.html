@@ -59,11 +59,11 @@
 
   function fixNav() { 
     if(window.scrollY >= topOfNav) {
-      document.body.style.paddingTop = nav.offsetHeight + 'px';
+      document.body.style.paddingTop = nav.offsetHeight + 'px';//dodaje padding żęby nei skakało jak dojdziemy do nav-top
       document.body.classList.add('fixed-nav');
     } else {
       document.body.style.paddingTop = 0;
-      document.body.classList.remove('fixed-nav');
+      document.body.classList.remove('fixed-nav');//  usuwa padding dodany wyżej żeby nie skakało nam jak dojdziemy do nav-top
     }
   }
 
